@@ -44,10 +44,14 @@ def ai_health():
 
 @ai_bp.route('/conversations', methods=['GET'])
 def list_conversations():
+    """Lists conversations owned by the caller (or unowned guest conversations for anonymous users)."""
     user_id = _get_current_user_id()
     query = Conversation.query
     if user_id:
         query = query.filter_by(user_id=user_id)
+    else:
+        # Strictly restrict anonymous callers to unauthenticated conversations
+        query = query.filter(Conversation.user_id.is_(None))
     
     # Optional search query filter
     q = request.args.get('q', '').strip()

@@ -9,20 +9,30 @@ logger = logging.getLogger(__name__)
 class S3Service:
     @staticmethod
     def get_s3_client():
+        import os
         aws_key = current_app.config.get('AWS_ACCESS_KEY_ID')
         aws_secret = current_app.config.get('AWS_SECRET_ACCESS_KEY')
         aws_region = current_app.config.get('AWS_REGION', 'us-east-1')
-        
-        if not aws_key or not aws_secret:
-            return None
-        
-        return boto3.client(
-            's3',
-            region_name=aws_region,
-            aws_access_key_id=aws_key,
-            aws_secret_access_key=aws_secret,
-            config=BotoConfig(signature_version='s3v4')
-        )
+
+        # Static key authentication
+        if aws_key and aws_secret and aws_key != 'your_aws_access_key':
+            return boto3.client(
+                's3',
+                region_name=aws_region,
+                aws_access_key_id=aws_key,
+                aws_secret_access_key=aws_secret,
+                config=BotoConfig(signature_version='s3v4')
+            )
+
+        # IAM role authentication (EC2 instance metadata or ECS task role)
+        if os.environ.get('AWS_EXECUTION_ENV') or os.environ.get('USE_AWS_IAM_ROLE', '').lower() == 'true':
+            return boto3.client(
+                's3',
+                region_name=aws_region,
+                config=BotoConfig(signature_version='s3v4')
+            )
+
+        return None
 
     @classmethod
     def generate_presigned_upload_url(cls, filename: str, content_type: str, expiration: int = 3600) -> dict:

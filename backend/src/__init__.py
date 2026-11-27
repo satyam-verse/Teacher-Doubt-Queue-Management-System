@@ -90,6 +90,15 @@ def create_app(config_name=None):
     def request_entity_too_large(e):
         return jsonify({'error': 'Payload Too Large', 'message': 'Uploaded file exceeds the maximum 16 MB limit.'}), 413
 
+    # Security headers for hardened production deployment
+    @app.after_request
+    def set_security_headers(response):
+        response.headers['X-Content-Type-Options'] = 'nosniff'
+        response.headers['X-Frame-Options'] = 'DENY'
+        response.headers['X-XSS-Protection'] = '1; mode=block'
+        response.headers['Referrer-Policy'] = 'strict-origin-when-cross-origin'
+        return response
+
     # Auto-create tables and seed test accounts strictly in development mode
     with app.app_context():
         import backend.src.models

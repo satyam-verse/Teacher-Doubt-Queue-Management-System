@@ -126,13 +126,17 @@ def get_doubt(doubt_id):
 @doubts_bp.route('/<int:doubt_id>/claim', methods=['POST'])
 @jwt_required()
 def claim_doubt(doubt_id):
-    teacher_id = int(get_jwt_identity())
+    user_id = int(get_jwt_identity())
+    user = db.session.get(User, user_id)
+    if not user or user.role not in ['teacher', 'admin']:
+        return jsonify({'error': 'Forbidden', 'message': 'Only instructors or administrators can claim doubts.'}), 403
+
     doubt = db.session.get(Doubt, doubt_id)
     if not doubt:
         return jsonify({'error': 'Doubt not found'}), 404
 
     doubt.status = 'IN_PROGRESS'
-    doubt.resolved_by_id = teacher_id
+    doubt.resolved_by_id = user.id
     db.session.commit()
 
     d_dict = doubt.to_dict()

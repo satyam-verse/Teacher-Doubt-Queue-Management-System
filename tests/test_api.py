@@ -350,4 +350,54 @@ def test_security_conversation_isolation(client):
     del_res = client.delete(f'/api/v1/ai/conversations/{conv_id}', headers={'Authorization': f'Bearer {token_b}'})
     assert del_res.status_code == 403
 
+def test_security_headers_present(client):
+    """Verify security headers (nosniff, frame-options, xss) are returned on API responses."""
+    res = client.get('/api/v1/ai/health')
+    assert res.status_code == 200
+    assert res.headers.get('X-Content-Type-Options') == 'nosniff'
+    assert res.headers.get('X-Frame-Options') == 'DENY'
+    assert '1; mode=block' in res.headers.get('X-XSS-Protection', '')
+
+def test_security_student_cannot_claim_doubt(client):
+    """Verify students cannot claim doubts in the classroom queue."""
+    # Register student
+    reg = client.post('/api/v1/auth/register', json={
+        'email': 'student_claimer@doubtx.ai',
+        'password': 'Password123!',
+        'full_name': 'Sneaky Student',
+        'role': 'student'
+    })
+    token = reg.json['token']
+
+    # Create dummy doubt
+    doubt_res = client.post('/api/v1/doubts', json={
+        'student_name': 'Other Student',
+        'doubt': 'How to balance AVL trees?'
+    })
+    doubt_id = doubt_res.json['doubt']['id']
+
+    # Student attempts to claim doubt
+    claim_res = client.post(f'/api/v1/doubts/{doubt_id}/claim', headers={'Authorization': f'Bearer {token}'})
+    assert claim_res.status_code == 403
+    assert 'Only instructors or administrators' in claim_res.json['message']
+
+def test_security_anonymous_cannot_list_user_conversations(client):
+    """Verify unauthenticated callers cannot enumerate registered users' private conversations."""
+    # User creates conversation
+    reg = client.post('/api/v1/auth/register', json={
+        'email': 'private_user@doubtx.ai',
+        'password': 'PrivatePass123!',
+        'full_name': 'Private User'
+    })
+    token = reg.json['token']
+    client.post('/api/v1/ai/conversations', json={'title': 'Ultra Secret Thread'}, headers={'Authorization': f'Bearer {token}'})
+
+    # Anonymous user calls GET /api/v1/ai/conversations
+    anon_res = client.get('/api/v1/ai/conversations')
+    assert anon_res.status_code == 200
+    # Must NOT contain the registered user's thread
+    titles = [c['title'] for c in anon_res.json['conversations']]
+    assert 'Ultra Secret Thread' not in titles
+
+
 
