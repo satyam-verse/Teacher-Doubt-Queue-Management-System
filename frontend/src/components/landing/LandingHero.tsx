@@ -44,31 +44,35 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onNavigate, onOpenUpgr
   const [activeDemo, setActiveDemo] = useState(0);
 
   return (
-    <section className="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-32 bg-slate-950 border-b border-slate-900">
-      {/* Background glow effects */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-indigo-600/20 via-purple-600/15 to-cyan-500/10 blur-[130px] rounded-full pointer-events-none" />
+    <section className="relative overflow-hidden pt-12 pb-20 md:pt-24 md:pb-36 bg-navy-950 border-b border-white/10">
+      {/* Background radial glow & cyber grid effects */}
+      <div className="absolute inset-0 neo-grid-pattern opacity-30 pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-tr from-violet-600/20 via-indigo-600/15 to-cyan-500/15 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute -top-24 right-10 w-96 h-96 bg-cyan-500/10 blur-[100px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         
         {/* Top Announcement Pill */}
         <div className="flex justify-center mb-6">
-          <div className="inline-flex items-center space-x-2 rounded-full border border-indigo-500/30 bg-indigo-950/40 px-3.5 py-1 text-xs text-indigo-300 shadow-glow-violet">
-            <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
-            <span className="font-medium">DoubtX AI v2.5 Universal Intelligence Upgrade</span>
-            <span className="text-slate-500">|</span>
-            <span className="text-slate-300">Google Gemini Powered</span>
+          <div className="inline-flex items-center space-x-2 rounded-full border border-violet-500/30 bg-navy-900/80 px-4 py-1.5 text-xs text-violet-300 shadow-glow-violet backdrop-blur-md">
+            <Sparkles className="h-3.5 w-3.5 text-cyan-400 animate-pulse" />
+            <span className="font-semibold tracking-wide">DoubtX AI v2.5 Universal Intelligence Engine</span>
+            <span className="text-slate-600">|</span>
+            <span className="text-cyan-300 font-mono text-[11px]">Multi-Domain Gemini Core</span>
           </div>
         </div>
 
         {/* Hero Headline & Subhead */}
         <div className="text-center max-w-4xl mx-auto mb-12">
-          <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-6xl sm:leading-[1.15]">
+          <h1 className="text-4xl font-black tracking-tight text-white sm:text-6xl sm:leading-[1.12]">
             Universal Academic Intelligence Meets{' '}
-            <span className="text-gradient-violet">Real-Time Classroom Orchestration</span>
+            <span className="bg-gradient-to-r from-violet-400 via-indigo-300 to-cyan-400 bg-clip-text text-transparent">
+              Real-Time Classroom Orchestration
+            </span>
           </h1>
           <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Eliminate classroom bottleneck with a unified platform for multi-disciplinary AI reasoning, 
-            instant LaTeX derivations, and synchronized live FIFO doubt queue management for universities.
+            Eliminate university doubt backlogs with instant multi-disciplinary AI reasoning, 
+            interactive LaTeX derivations, and synchronized real-time FIFO doubt queues.
           </p>
 
           {/* Action Buttons */}
@@ -76,7 +80,7 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onNavigate, onOpenUpgr
             <Button
               size="lg"
               onClick={() => onNavigate('ai-solver')}
-              className="w-full sm:w-auto bg-gradient-to-r from-indigo-500 via-indigo-600 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold text-sm px-7 py-3 rounded-xl shadow-glow-violet transition-all transform hover:-translate-y-0.5"
+              className="w-full sm:w-auto bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white font-bold text-sm px-8 py-3.5 rounded-xl shadow-glow-violet transition-all transform hover:-translate-y-0.5"
             >
               <span>Launch AI Workspace Free</span>
               <ArrowRight className="h-4 w-4 ml-2" />
@@ -86,9 +90,9 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onNavigate, onOpenUpgr
               size="lg"
               variant="outline"
               onClick={() => onNavigate('student-dashboard')}
-              className="w-full sm:w-auto border-slate-700 hover:bg-slate-900 text-slate-200 text-sm px-6 py-3 rounded-xl"
+              className="w-full sm:w-auto border-white/10 bg-navy-900/60 hover:bg-navy-850 text-slate-200 text-sm px-6 py-3.5 rounded-xl shadow-sm hover:border-cyan-500/40"
             >
-              <Play className="h-4 w-4 mr-2 text-indigo-400" />
+              <Play className="h-4 w-4 mr-2 text-cyan-400" />
               <span>Enter Student Portal</span>
             </Button>
 
@@ -96,43 +100,43 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onNavigate, onOpenUpgr
               size="lg"
               variant="ghost"
               onClick={onOpenUpgrade}
-              className="w-full sm:w-auto text-slate-400 hover:text-white text-sm"
+              className="w-full sm:w-auto text-slate-300 hover:text-white hover:bg-white/[0.05] text-sm"
             >
               <span>View SaaS Pricing</span>
             </Button>
           </div>
 
           {/* Feature Highlights / Metrics */}
-          <div className="mt-10 grid grid-cols-2 md:grid-cols-4 gap-4 text-left max-w-3xl mx-auto">
-            <div className="p-3 rounded-lg bg-slate-900/40 border border-slate-800/80">
-              <div className="text-xl font-bold text-white">0.3s</div>
-              <div className="text-xs text-slate-400">WebSocket Live Sync</div>
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 text-left max-w-3xl mx-auto">
+            <div className="p-4 rounded-xl neo-glass-card">
+              <div className="text-2xl font-extrabold text-white font-mono">&lt; 300ms</div>
+              <div className="text-xs text-slate-400 mt-1">WebSocket Live Sync</div>
             </div>
-            <div className="p-3 rounded-lg bg-slate-900/40 border border-slate-800/80">
-              <div className="text-xl font-bold text-indigo-400">100%</div>
-              <div className="text-xs text-slate-400">Subject Coverage</div>
+            <div className="p-4 rounded-xl neo-glass-card">
+              <div className="text-2xl font-extrabold text-violet-400 font-mono">100%</div>
+              <div className="text-xs text-slate-400 mt-1">Subject Coverage</div>
             </div>
-            <div className="p-3 rounded-lg bg-slate-900/40 border border-slate-800/80">
-              <div className="text-xl font-bold text-cyan-400">KaTeX + OCR</div>
-              <div className="text-xs text-slate-400">Math & PDF Solving</div>
+            <div className="p-4 rounded-xl neo-glass-card">
+              <div className="text-2xl font-extrabold text-cyan-400 font-mono">KaTeX + OCR</div>
+              <div className="text-xs text-slate-400 mt-1">Math & Multimodal Proofs</div>
             </div>
-            <div className="p-3 rounded-lg bg-slate-900/40 border border-slate-800/80">
-              <div className="text-xl font-bold text-purple-400">Role-Based</div>
-              <div className="text-xs text-slate-400">Student, Teacher, Admin</div>
+            <div className="p-4 rounded-xl neo-glass-card">
+              <div className="text-2xl font-extrabold text-emerald-400 font-mono">Zero Setup</div>
+              <div className="text-xs text-slate-400 mt-1">Instant Student/Teacher RBAC</div>
             </div>
           </div>
         </div>
 
         {/* Live Interactive AI Playground Simulator Widget */}
-        <div className="max-w-4xl mx-auto rounded-2xl bg-slate-900/90 border border-slate-800 shadow-2xl p-4 sm:p-6 backdrop-blur">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-800 gap-3">
+        <div className="max-w-4xl mx-auto rounded-2xl neo-glass-card border border-white/10 shadow-2xl p-4 sm:p-6 backdrop-blur-xl relative overflow-hidden">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-white/10 gap-3">
             <div className="flex items-center space-x-2">
               <div className="flex space-x-1.5">
                 <div className="h-3 w-3 rounded-full bg-red-500/80" />
                 <div className="h-3 w-3 rounded-full bg-amber-500/80" />
                 <div className="h-3 w-3 rounded-full bg-emerald-500/80" />
               </div>
-              <span className="text-xs font-mono text-slate-400 ml-2">doubtx-ai-simulator ~ interactive-preview</span>
+              <span className="text-xs font-mono text-cyan-400/90 ml-2">doubtx-ai-simulator ~ interactive-preview</span>
             </div>
 
             {/* Discipline Selector Tabs */}
@@ -141,10 +145,10 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onNavigate, onOpenUpgr
                 <button
                   key={demo.id}
                   onClick={() => setActiveDemo(idx)}
-                  className={`text-xs px-2.5 py-1 rounded-md transition-all font-medium ${
+                  className={`text-xs font-mono px-3 py-1 rounded-lg transition-all font-semibold ${
                     activeDemo === idx
-                      ? 'bg-indigo-600 text-white shadow'
-                      : 'bg-slate-800/80 text-slate-400 hover:text-white'
+                      ? 'bg-gradient-to-r from-violet-600 to-cyan-600 text-white shadow-md'
+                      : 'bg-navy-950/70 border border-white/5 text-slate-400 hover:text-white'
                   }`}
                 >
                   {demo.id.toUpperCase()}
@@ -154,40 +158,40 @@ export const LandingHero: React.FC<LandingHeroProps> = ({ onNavigate, onOpenUpgr
           </div>
 
           {/* Active Demo Content */}
-          <div className="mt-4 space-y-4">
+          <div className="mt-5 space-y-4">
             <div>
-              <div className="flex items-center space-x-2 mb-1.5">
-                <Badge variant="outline" className={`text-[10px] ${sampleDemos[activeDemo].badgeColor}`}>
+              <div className="flex items-center space-x-2 mb-2">
+                <Badge variant="outline" className={`text-[10px] font-mono ${sampleDemos[activeDemo].badgeColor}`}>
                   {sampleDemos[activeDemo].tag}
                 </Badge>
-                <span className="text-xs text-slate-500">Student Question</span>
+                <span className="text-xs text-slate-400 font-mono">Academic Question</span>
               </div>
-              <div className="p-3 rounded-lg bg-slate-950/70 border border-slate-800/80 text-sm font-medium text-slate-100">
+              <div className="p-3.5 rounded-xl bg-navy-950/80 border border-white/10 text-sm font-medium text-slate-100 shadow-inner">
                 "{sampleDemos[activeDemo].query}"
               </div>
             </div>
 
             <div>
-              <div className="flex items-center space-x-2 mb-1.5">
-                <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
-                <span className="text-xs font-semibold text-indigo-300">DoubtX AI Step-by-Step Reasoning:</span>
+              <div className="flex items-center space-x-2 mb-2">
+                <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+                <span className="text-xs font-semibold text-cyan-300">DoubtX AI Step-by-Step Reasoning:</span>
               </div>
-              <div className="p-4 rounded-lg bg-slate-950 border border-indigo-900/30 text-xs sm:text-sm text-slate-200 font-mono whitespace-pre-line leading-relaxed">
+              <div className="p-4 rounded-xl bg-navy-950/90 border border-violet-500/20 text-xs sm:text-sm text-slate-200 font-mono whitespace-pre-line leading-relaxed shadow-lg">
                 {sampleDemos[activeDemo].reasoning}
               </div>
             </div>
 
-            <div className="pt-2 flex justify-between items-center text-xs text-slate-400">
-              <span className="flex items-center space-x-1.5 text-emerald-400">
-                <CheckCircle2 className="h-3.5 w-3.5" />
+            <div className="pt-2 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-2">
+              <span className="flex items-center space-x-1.5 text-emerald-400 font-medium">
+                <CheckCircle2 className="h-4 w-4" />
                 <span>Verified with Universal Gemini Model</span>
               </span>
               <button
                 onClick={() => onNavigate('ai-solver')}
-                className="text-indigo-400 hover:text-indigo-300 font-medium underline flex items-center space-x-1"
+                className="text-cyan-400 hover:text-cyan-300 font-semibold underline flex items-center space-x-1"
               >
                 <span>Ask your own doubt in full workspace</span>
-                <ArrowRight className="h-3 w-3 ml-1" />
+                <ArrowRight className="h-3.5 w-3.5 ml-1" />
               </button>
             </div>
           </div>

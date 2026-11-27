@@ -202,12 +202,12 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
   const hasMessages = conversation?.messages && conversation.messages.length > 0;
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-slate-50/50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 overflow-hidden">
+    <div className="flex-1 flex flex-col h-full bg-navy-950 text-slate-100 overflow-hidden relative">
       
       {/* Top Workspace Header Bar */}
-      <div className="flex items-center justify-between px-6 py-3.5 border-b border-slate-200/80 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur z-10">
+      <div className="flex items-center justify-between px-6 py-3.5 border-b border-white/10 bg-navy-900/80 backdrop-blur-xl z-10">
         <div className="flex items-center space-x-3 truncate flex-1 mr-4">
-          <div className="p-1.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400 flex-shrink-0">
+          <div className="p-1.5 rounded-lg bg-violet-950/80 border border-violet-500/30 text-violet-400 flex-shrink-0 shadow-sm">
             <Sparkles className="h-4 w-4" />
           </div>
 
@@ -222,18 +222,18 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
                   if (e.key === 'Escape') setIsEditingTitle(false);
                 }}
                 autoFocus
-                className="w-full bg-slate-100 dark:bg-slate-800 border border-indigo-400 rounded-md px-2 py-1 text-sm font-semibold focus:outline-none"
+                className="w-full bg-navy-850 border border-cyan-400 rounded-lg px-2.5 py-1 text-sm font-semibold text-white focus:outline-none"
               />
               <button
                 onClick={handleSaveTitle}
-                className="p-1 text-emerald-600 hover:text-emerald-700 dark:text-emerald-400"
+                className="p-1 text-emerald-400 hover:text-emerald-300"
                 title="Save title"
               >
                 <Check className="h-4 w-4" />
               </button>
               <button
                 onClick={() => setIsEditingTitle(false)}
-                className="p-1 text-slate-400 hover:text-slate-600"
+                className="p-1 text-slate-400 hover:text-slate-200"
                 title="Cancel"
               >
                 <X className="h-4 w-4" />
@@ -241,7 +241,7 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
             </div>
           ) : (
             <div className="flex items-center space-x-2 truncate group">
-              <h2 className="text-sm font-bold tracking-tight text-slate-900 dark:text-white truncate">
+              <h2 className="text-sm font-bold tracking-tight text-white truncate">
                 {conversation ? conversation.title : 'Universal Academic & Technical Assistant'}
               </h2>
               {conversation && (
@@ -250,19 +250,19 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
                     <button
                       onClick={() => onPinConversation(conversation.id)}
                       className={`p-1 rounded ${
-                        conversation.is_pinned ? 'text-indigo-500' : 'text-slate-400 hover:text-indigo-600'
+                        conversation.is_pinned ? 'text-violet-400' : 'text-slate-400 hover:text-violet-400'
                       }`}
                       title={conversation.is_pinned ? 'Unpin discussion' : 'Pin discussion'}
                     >
-                      <Pin className="h-3 w-3" />
+                      <Pin className="h-3.5 w-3.5" />
                     </button>
                   )}
                   <button
                     onClick={() => setIsEditingTitle(true)}
-                    className="p-1 text-slate-400 hover:text-indigo-600 transition-opacity"
+                    className="p-1 text-slate-400 hover:text-cyan-400 transition-opacity"
                     title="Rename chat"
                   >
-                    <Pencil className="h-3 w-3" />
+                    <Pencil className="h-3.5 w-3.5" />
                   </button>
                 </div>
               )}
@@ -275,7 +275,7 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
           {onOpenUpgrade && (
             <button
               onClick={onOpenUpgrade}
-              className="hidden sm:flex items-center space-x-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-indigo-950/60 border border-indigo-700/60 text-indigo-300 hover:bg-indigo-900/60 transition"
+              className="hidden sm:flex items-center space-x-1 px-2.5 py-1 text-xs font-semibold rounded-lg bg-violet-950/70 border border-violet-500/40 text-violet-300 hover:bg-violet-900/60 transition shadow-sm"
               title="Upgrade to DoubtX Pro"
             >
               <Zap className="h-3 w-3 text-amber-400" />
@@ -283,51 +283,51 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
             </button>
           )}
 
-          <div className="flex items-center space-x-1.5 bg-slate-100 dark:bg-slate-800/80 p-1 rounded-xl text-xs font-semibold flex-shrink-0">
+          <div className="flex items-center space-x-1 bg-navy-900/90 border border-white/10 p-1 rounded-xl text-xs font-semibold flex-shrink-0">
             <button
               onClick={() => setLevel('beginner')}
-            className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
-              level === 'beginner'
-                ? 'bg-emerald-500 text-white shadow-sm'
-                : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
-            }`}
-            title="Beginner: Everyday analogies, step-by-step scaffolding, simple terms"
-          >
-            Beginner
-          </button>
-          <button
-            onClick={() => setLevel('intermediate')}
-            className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
-              level === 'intermediate'
-                ? 'bg-indigo-600 text-white shadow-sm'
-                : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
-            }`}
-            title="Intermediate: Comprehensive analysis, Big-O, industry/academic standards"
-          >
-            Intermediate
-          </button>
-          <button
-            onClick={() => setLevel('advanced')}
-            className={`px-3 py-1 rounded-lg transition-all cursor-pointer ${
-              level === 'advanced'
-                ? 'bg-purple-600 text-white shadow-sm'
-                : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
-            }`}
-            title="Advanced: Deep internals, formal mathematical proofs, low-level trade-offs"
-          >
-            Advanced
-          </button>
+              className={`px-3 py-1 rounded-lg transition-all cursor-pointer font-medium ${
+                level === 'beginner'
+                  ? 'bg-emerald-600 text-white shadow-sm'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+              title="Beginner: Everyday analogies, step-by-step scaffolding, simple terms"
+            >
+              Beginner
+            </button>
+            <button
+              onClick={() => setLevel('intermediate')}
+              className={`px-3 py-1 rounded-lg transition-all cursor-pointer font-medium ${
+                level === 'intermediate'
+                  ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-sm'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+              title="Intermediate: Comprehensive analysis, Big-O, industry/academic standards"
+            >
+              Intermediate
+            </button>
+            <button
+              onClick={() => setLevel('advanced')}
+              className={`px-3 py-1 rounded-lg transition-all cursor-pointer font-medium ${
+                level === 'advanced'
+                  ? 'bg-cyan-600 text-white shadow-sm'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+              title="Advanced: Deep internals, formal mathematical proofs, low-level trade-offs"
+            >
+              Advanced
+            </button>
+          </div>
         </div>
       </div>
-    </div>
 
       {/* Unconfigured API Notice Banner */}
       {aiStatus?.status === 'unconfigured' && (
-        <div className="mx-6 mt-3 p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-800 dark:text-amber-200 text-xs flex items-center justify-between">
+        <div className="mx-6 mt-3 p-3.5 rounded-xl bg-amber-950/60 border border-amber-500/30 text-amber-200 text-xs flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Sparkles className="h-4 w-4 text-amber-500 flex-shrink-0" />
+            <Sparkles className="h-4 w-4 text-amber-400 flex-shrink-0" />
             <span>
-              <strong>Gemini API Key Needed:</strong> Add your <code>GEMINI_API_KEY</code> to <code>backend/.env</code> to activate live Gemini AI answers.
+              <strong className="font-semibold">Gemini API Key Needed:</strong> Add your <code className="font-mono bg-navy-900 px-1 py-0.5 rounded text-amber-300">GEMINI_API_KEY</code> to <code className="font-mono bg-navy-900 px-1 py-0.5 rounded text-amber-300">backend/.env</code> to activate live Gemini AI answers.
             </span>
           </div>
         </div>
@@ -339,14 +339,14 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
           /* Welcome Screen */
           <div className="max-w-3xl mx-auto py-12 text-center space-y-8 animate-in fade-in duration-300">
             <div className="space-y-3">
-              <div className="inline-flex p-3.5 rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white shadow-xl shadow-indigo-500/20">
+              <div className="inline-flex p-3.5 rounded-2xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-cyan-500 text-white shadow-glow-violet">
                 <Sparkles className="h-8 w-8" />
               </div>
-              <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-                Universal AI Academic Assistant
+              <h1 className="text-3xl sm:text-4xl font-black tracking-tight text-white">
+                Universal Academic & Technical Assistant
               </h1>
-              <p className="text-sm text-slate-500 dark:text-slate-400 max-w-lg mx-auto">
-                Ask about virtually any subject—Computer Science, Mathematics, Natural Sciences, History, Economics, Engineering, or unfamiliar concepts.
+              <p className="text-sm text-slate-400 max-w-lg mx-auto">
+                Explore any discipline—Computer Science, Mathematical Proofs, Natural Sciences, Economics, Engineering, or upload problem screenshots.
               </p>
             </div>
 
@@ -361,20 +361,20 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
                       setLevel(card.level);
                       onSelectSuggestedPrompt(card.prompt, card.level);
                     }}
-                    className="group p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900/60 hover:border-indigo-500/40 hover:shadow-lg hover:shadow-indigo-500/5 transition-all text-left flex flex-col justify-between cursor-pointer"
+                    className="group p-4 rounded-2xl neo-glass-card border border-white/10 hover:border-cyan-500/50 hover:shadow-glow-cyan transition-all text-left flex flex-col justify-between cursor-pointer"
                   >
                     <div className="space-y-2">
-                      <div className={`inline-flex p-2 rounded-xl bg-gradient-to-br ${card.color} border`}>
+                      <div className={`inline-flex p-2 rounded-xl bg-gradient-to-br ${card.color} border shadow-sm`}>
                         <IconComponent className="h-4 w-4" />
                       </div>
-                      <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                      <h3 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
                         {card.title}
                       </h3>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 line-clamp-2">
+                      <p className="text-xs text-slate-400 line-clamp-2">
                         {card.subtitle}
                       </p>
                     </div>
-                    <span className="text-[10px] font-semibold text-slate-400 group-hover:text-indigo-500 flex items-center space-x-1 mt-4">
+                    <span className="text-[10px] font-mono font-semibold text-slate-400 group-hover:text-cyan-400 flex items-center space-x-1 mt-4">
                       <span>Ask question</span>
                       <span>→</span>
                     </span>
@@ -396,7 +396,7 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
                   className={`flex items-start space-x-3 ${isUser ? 'justify-end' : 'justify-start'}`}
                 >
                   {!isUser && (
-                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-500/20">
+                    <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-cyan-500 text-white shadow-glow-violet">
                       <Sparkles className="h-4 w-4" />
                     </div>
                   )}
@@ -404,16 +404,16 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
                   <div
                     className={`relative max-w-[85%] rounded-2xl px-5 py-4 ${
                       isUser
-                        ? 'bg-gradient-to-r from-indigo-600 to-violet-600 text-white shadow-md shadow-indigo-500/10 rounded-tr-sm'
-                        : 'bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800/80 shadow-sm rounded-tl-sm text-slate-900 dark:text-slate-100'
+                        ? 'bg-gradient-to-r from-violet-600 via-indigo-600 to-cyan-600 text-white shadow-glow-violet rounded-tr-sm font-medium'
+                        : 'neo-glass-card bg-navy-900/90 border border-white/10 shadow-xl rounded-tl-sm text-slate-100'
                     }`}
                   >
                     {/* Attachment preview if user uploaded image or PDF */}
                     {msg.attachment_url && (
-                      <div className="mb-3 overflow-hidden rounded-xl border border-white/20 dark:border-slate-700 max-w-sm">
+                      <div className="mb-3 overflow-hidden rounded-xl border border-white/20 max-w-sm shadow-md">
                         {isPdf ? (
-                          <div className="flex items-center space-x-2.5 p-3 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-900 dark:text-indigo-200">
-                            <FileText className="h-6 w-6 text-indigo-600 dark:text-indigo-400 flex-shrink-0" />
+                          <div className="flex items-center space-x-2.5 p-3 bg-navy-950/80 text-cyan-200">
+                            <FileText className="h-6 w-6 text-cyan-400 flex-shrink-0" />
                             <div className="truncate">
                               <p className="text-xs font-semibold truncate">PDF Document</p>
                               <p className="text-[10px] text-slate-400">Attached for analysis</p>
@@ -437,10 +437,10 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
 
                     {/* AI Message Action Controls */}
                     {!isUser && (
-                      <div className="flex items-center justify-between pt-3 mt-3 border-t border-slate-100 dark:border-slate-800/80 text-xs text-slate-400">
+                      <div className="flex items-center justify-between pt-3 mt-3 border-t border-white/10 text-xs text-slate-400">
                         <div className="flex items-center space-x-2">
                           {msg.explanation_level && (
-                            <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400">
+                            <span className="text-[10px] uppercase font-mono font-bold tracking-wider px-2 py-0.5 rounded-full bg-navy-950 border border-white/10 text-cyan-300">
                               {msg.explanation_level}
                             </span>
                           )}
@@ -449,11 +449,11 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
                         <div className="flex items-center space-x-2">
                           <button
                             onClick={() => handleCopyAnswer(msg.id, msg.content)}
-                            className="flex items-center space-x-1 p-1 hover:text-slate-700 dark:hover:text-white transition-colors cursor-pointer"
+                            className="flex items-center space-x-1 p-1 hover:text-white transition-colors cursor-pointer"
                             title="Copy entire response"
                           >
                             {copiedMessageId === msg.id ? (
-                              <Check className="h-3.5 w-3.5 text-emerald-500" />
+                              <Check className="h-3.5 w-3.5 text-emerald-400" />
                             ) : (
                               <Copy className="h-3.5 w-3.5" />
                             )}
@@ -463,7 +463,7 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
                           <button
                             onClick={onRegenerate}
                             disabled={isGenerating}
-                            className="flex items-center space-x-1 p-1 hover:text-slate-700 dark:hover:text-white transition-colors cursor-pointer disabled:opacity-50"
+                            className="flex items-center space-x-1 p-1 hover:text-white transition-colors cursor-pointer disabled:opacity-50"
                             title="Regenerate answer"
                           >
                             <RefreshCw className={`h-3.5 w-3.5 ${isGenerating ? 'animate-spin' : ''}`} />
@@ -480,13 +480,13 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
             {/* Thinking / Generating animation state */}
             {isGenerating && (
               <div className="flex items-start space-x-3">
-                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-500/20 animate-pulse">
+                <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-cyan-500 text-white shadow-glow-violet animate-pulse">
                   <Sparkles className="h-4 w-4" />
                 </div>
-                <div className="p-4 rounded-2xl rounded-tl-sm bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-sm flex items-center space-x-2.5">
-                  <Loader2 className="h-4 w-4 text-indigo-500 animate-spin" />
-                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400 animate-pulse">
-                    DoubtX AI is synthesizing answer...
+                <div className="p-4 rounded-2xl rounded-tl-sm neo-glass-card bg-navy-900/90 border border-white/10 shadow-lg flex items-center space-x-3">
+                  <Loader2 className="h-4 w-4 text-cyan-400 animate-spin" />
+                  <span className="text-xs font-mono font-medium text-slate-300 animate-pulse">
+                    DoubtX AI is synthesizing step-by-step reasoning...
                   </span>
                 </div>
               </div>
@@ -498,38 +498,38 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
       </div>
 
       {/* Bottom Message Input Bar */}
-      <div className="p-4 border-t border-slate-200/80 dark:border-slate-800/80 bg-white dark:bg-slate-900">
+      <div className="p-4 border-t border-white/10 bg-navy-950/90 backdrop-blur-md">
         <div className="max-w-3xl mx-auto space-y-2">
           
           {/* File attachment preview chip */}
           {file && (
-            <div className="flex items-center justify-between p-2 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs">
+            <div className="flex items-center justify-between p-2 rounded-xl bg-navy-900/80 border border-white/10 text-xs">
               <div className="flex items-center space-x-2 truncate">
                 {file.type === 'application/pdf' || file.name.endsWith('.pdf') ? (
-                  <FileText className="h-5 w-5 text-indigo-500 flex-shrink-0" />
+                  <FileText className="h-5 w-5 text-cyan-400 flex-shrink-0" />
                 ) : filePreview ? (
-                  <img src={filePreview} alt="Preview" className="h-8 w-8 rounded object-cover" />
+                  <img src={filePreview} alt="Preview" className="h-8 w-8 rounded object-cover border border-white/10" />
                 ) : (
-                  <Code2 className="h-4 w-4 text-indigo-500" />
+                  <Code2 className="h-4 w-4 text-cyan-400" />
                 )}
-                <span className="font-medium text-slate-800 dark:text-slate-200 truncate">
+                <span className="font-medium text-slate-200 truncate">
                   {file.name}
                 </span>
-                <span className="text-slate-400 text-[10px]">
+                <span className="text-slate-400 font-mono text-[10px]">
                   ({(file.size / 1024).toFixed(1)} KB)
                 </span>
               </div>
-              <button onClick={clearFile} className="p-1 text-slate-400 hover:text-red-500">
+              <button onClick={clearFile} className="p-1 text-slate-400 hover:text-red-400">
                 <X className="h-4 w-4" />
               </button>
             </div>
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="relative flex items-end rounded-2xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:border-transparent transition-all shadow-sm">
+          <form onSubmit={handleSubmit} className="relative flex items-end rounded-2xl border border-white/10 bg-navy-900/90 focus-within:border-cyan-500/80 focus-within:ring-2 focus-within:ring-cyan-500/20 transition-all shadow-xl">
             
             {/* Attachment Button */}
-            <label className="p-3 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 cursor-pointer transition-colors" title="Attach screenshot, diagram, or PDF document">
+            <label className="p-3 text-slate-400 hover:text-cyan-400 cursor-pointer transition-colors" title="Attach screenshot, diagram, or PDF document">
               <Paperclip className="h-5 w-5" />
               <input
                 type="file"
@@ -547,14 +547,14 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
               onChange={(e) => setInputText(e.target.value)}
               onKeyDown={handleKeyDown}
               placeholder={`Ask about any academic or technical subject... (${level.toUpperCase()} mode)`}
-              className="flex-1 max-h-48 min-h-[44px] py-3 px-1 text-sm bg-transparent border-0 focus:outline-none resize-none placeholder:text-slate-400 text-slate-900 dark:text-white"
+              className="flex-1 max-h-48 min-h-[44px] py-3 px-1 text-sm bg-transparent border-0 focus:outline-none resize-none placeholder:text-slate-500 text-white"
             />
 
             {/* Send Button */}
             <button
               type="submit"
               disabled={(!inputText.trim() && !file) || isGenerating || isUploading}
-              className="p-2.5 m-1.5 rounded-xl bg-gradient-to-tr from-indigo-600 to-violet-600 text-white shadow-md shadow-indigo-500/20 hover:from-indigo-700 hover:to-violet-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer"
+              className="p-2.5 m-1.5 rounded-xl bg-gradient-to-tr from-violet-600 to-cyan-600 text-white shadow-glow-cyan hover:from-violet-500 hover:to-cyan-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all cursor-pointer"
               title="Send message (Enter)"
             >
               {isGenerating || isUploading ? (
@@ -565,8 +565,8 @@ export const DoubtSolverWorkspace: React.FC<DoubtSolverWorkspaceProps> = ({
             </button>
           </form>
 
-          <p className="text-[11px] text-center text-slate-400">
-            Press <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[10px] font-mono">Enter</kbd> to send, <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-[10px] font-mono">Shift+Enter</kbd> for new line. Universal AI reasoning across all subjects.
+          <p className="text-[11px] text-center text-slate-400 font-mono">
+            Press <kbd className="px-1.5 py-0.5 rounded bg-navy-900 border border-white/10 text-[10px] text-slate-300">Enter</kbd> to send, <kbd className="px-1.5 py-0.5 rounded bg-navy-900 border border-white/10 text-[10px] text-slate-300">Shift+Enter</kbd> for newline. Universal multi-domain reasoning engine.
           </p>
         </div>
       </div>

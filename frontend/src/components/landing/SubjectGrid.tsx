@@ -76,19 +76,19 @@ export const SubjectGrid: React.FC<SubjectGridProps> = ({ onSelectPrompt }) => {
   ];
 
   return (
-    <section className="py-20 bg-slate-950/80 border-b border-slate-900">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section className="py-20 md:py-28 bg-navy-950 border-b border-white/10 relative">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="inline-flex items-center space-x-1.5 text-xs text-indigo-400 font-semibold uppercase tracking-wider mb-2">
+          <div className="inline-flex items-center space-x-2 text-xs text-cyan-400 font-mono font-semibold uppercase tracking-wider mb-2">
             <Sparkles className="h-3.5 w-3.5" />
-            <span>Universal Domain Coverage</span>
+            <span>Universal Domain Matrix</span>
           </div>
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            No Academic Subject Restrictions
+          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            Zero Academic Subject Restrictions
           </h2>
           <p className="mt-3 text-sm text-slate-400">
-            DoubtX AI synthesizes multi-turn academic reasoning across every higher-education faculty.
+            DoubtX AI synthesizes multi-turn academic reasoning and formal proofs across every university faculty.
           </p>
         </div>
 
@@ -99,31 +99,31 @@ export const SubjectGrid: React.FC<SubjectGridProps> = ({ onSelectPrompt }) => {
             return (
               <div
                 key={index}
-                className="rounded-2xl p-6 bg-slate-900/60 border border-slate-800/80 hover:border-slate-700 transition-all hover:shadow-xl group"
+                className="neo-glass-card rounded-2xl p-6 border border-white/10 hover:border-cyan-500/40 transition-all hover:shadow-glow-cyan group relative overflow-hidden"
               >
                 <div className="flex items-center space-x-3 mb-4">
-                  <div className={`p-2.5 rounded-xl border bg-gradient-to-br ${domain.color}`}>
+                  <div className={`p-2.5 rounded-xl border bg-gradient-to-br ${domain.color} shadow-sm`}>
                     <Icon className="h-5 w-5" />
                   </div>
-                  <h3 className="font-semibold text-base text-white group-hover:text-indigo-300 transition-colors">
+                  <h3 className="font-bold text-base text-white group-hover:text-cyan-300 transition-colors">
                     {domain.title}
                   </h3>
                 </div>
 
-                <p className="text-xs text-slate-400 mb-5 leading-relaxed">
+                <p className="text-xs text-slate-400 mb-5 leading-relaxed font-normal">
                   {domain.description}
                 </p>
 
-                <div className="space-y-2 pt-2 border-t border-slate-800/80">
-                  <div className="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Example Doubts:</div>
+                <div className="space-y-2 pt-3 border-t border-white/10">
+                  <div className="text-[10px] uppercase font-mono font-bold text-slate-500 tracking-wider">Example Doubts:</div>
                   {domain.examples.map((ex, i) => (
                     <button
                       key={i}
                       onClick={() => onSelectPrompt && onSelectPrompt(ex)}
-                      className="w-full text-left flex items-start space-x-2 text-xs text-slate-300 hover:text-indigo-300 transition p-1 rounded hover:bg-slate-800/40"
+                      className="w-full text-left flex items-start space-x-2 text-xs text-slate-300 hover:text-cyan-300 transition-colors p-1.5 rounded-lg hover:bg-white/[0.05]"
                     >
-                      <Check className="h-3 w-3 text-indigo-400 mt-0.5 shrink-0" />
-                      <span className="truncate">{ex}</span>
+                      <Check className="h-3.5 w-3.5 text-cyan-400 mt-0.5 shrink-0" />
+                      <span className="truncate font-medium">{ex}</span>
                     </button>
                   ))}
                 </div>

@@ -86,24 +86,24 @@ export const DoubtForm: React.FC<DoubtFormProps> = ({ onDoubtCreated, activeSess
   };
 
   return (
-    <Card className="border-indigo-100 dark:border-slate-800 shadow-md shadow-indigo-500/5">
-      <CardHeader className="pb-4">
-        <div className="flex items-center space-x-2">
-          <div className="p-2 rounded-lg bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400">
+    <Card className="neo-glass-card bg-navy-900/90 border-white/10 shadow-2xl">
+      <CardHeader className="pb-4 border-b border-white/5">
+        <div className="flex items-center space-x-2.5">
+          <div className="p-2 rounded-xl bg-violet-950/80 border border-violet-500/30 text-cyan-400 shadow-sm">
             <Sparkles className="h-5 w-5" />
           </div>
           <div>
-            <CardTitle>Ask a Question</CardTitle>
-            <CardDescription>
-              Join the live classroom queue with AI-powered instant assistance
+            <CardTitle className="text-white font-extrabold text-lg">Ask a Question</CardTitle>
+            <CardDescription className="text-slate-400 text-xs">
+              Join the live classroom FIFO queue with Gemini AI-powered instant pre-diagnosis
             </CardDescription>
           </div>
         </div>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="pt-4">
         {error && (
-          <div className="mb-4 p-3 rounded-lg bg-red-50 text-red-700 text-xs border border-red-200">
+          <div className="mb-4 p-3 rounded-xl bg-rose-950/70 text-rose-200 text-xs border border-rose-500/40 font-medium">
             {error}
           </div>
         )}
@@ -111,10 +111,11 @@ export const DoubtForm: React.FC<DoubtFormProps> = ({ onDoubtCreated, activeSess
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-300 mb-1">
                 Your Full Name
               </label>
               <Input
+                className="bg-navy-950 border-white/10 text-white placeholder-slate-500 focus:border-cyan-500"
                 placeholder="e.g. Satyam Kumar"
                 value={studentName}
                 onChange={(e) => setStudentName(e.target.value)}
@@ -123,10 +124,11 @@ export const DoubtForm: React.FC<DoubtFormProps> = ({ onDoubtCreated, activeSess
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-300 mb-1">
                 Classroom Session Code
               </label>
               <Input
+                className="bg-navy-950 border-white/10 text-white placeholder-slate-500 font-mono focus:border-cyan-500 uppercase"
                 placeholder="e.g. DX-CS101"
                 value={sessionCode}
                 onChange={(e) => setSessionCode(e.target.value.toUpperCase())}
@@ -135,11 +137,11 @@ export const DoubtForm: React.FC<DoubtFormProps> = ({ onDoubtCreated, activeSess
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+            <label className="block text-xs font-semibold text-slate-300 mb-1">
               What are you stuck on? (Be specific, paste errors or code)
             </label>
             <textarea
-              className="flex min-h-[110px] w-full rounded-lg border border-slate-300 bg-white p-3 text-sm placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+              className="flex min-h-[110px] w-full rounded-xl border border-white/10 bg-navy-950 p-3.5 text-sm text-white placeholder:text-slate-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500/30 focus-visible:border-cyan-500 leading-relaxed shadow-inner"
               placeholder="e.g. In my quicksort implementation, I am getting RecursionError: maximum recursion depth exceeded when testing sorted arrays..."
               value={doubtText}
               onChange={(e) => setDoubtText(e.target.value)}
@@ -149,7 +151,7 @@ export const DoubtForm: React.FC<DoubtFormProps> = ({ onDoubtCreated, activeSess
 
           {/* S3 Attachment Upload */}
           <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-            <label className="flex items-center space-x-2 text-xs font-medium text-slate-600 hover:text-indigo-600 cursor-pointer dark:text-slate-400">
+            <label className="flex items-center space-x-2 text-xs font-medium text-slate-400 hover:text-cyan-400 cursor-pointer transition-colors">
               <Paperclip className="h-4 w-4" />
               <span>{file ? file.name : 'Attach screenshot or code snippet (AWS S3)'}</span>
               <input
@@ -165,7 +167,7 @@ export const DoubtForm: React.FC<DoubtFormProps> = ({ onDoubtCreated, activeSess
             </label>
 
             {file && (
-              <span className="text-[11px] text-emerald-600 flex items-center">
+              <span className="text-[11px] text-emerald-400 font-mono flex items-center">
                 <CheckCircle2 className="h-3.5 w-3.5 mr-1" /> Ready to upload ({(file.size / 1024).toFixed(1)} KB)
               </span>
             )}
@@ -173,7 +175,7 @@ export const DoubtForm: React.FC<DoubtFormProps> = ({ onDoubtCreated, activeSess
             <Button
               type="submit"
               disabled={isSubmitting || isUploading}
-              className="ml-auto w-full sm:w-auto"
+              className="ml-auto w-full sm:w-auto bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 text-white font-bold shadow-glow-cyan"
             >
               {isSubmitting || isUploading ? (
                 <>

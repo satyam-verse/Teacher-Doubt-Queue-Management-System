@@ -341,12 +341,12 @@ const MainShell: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col overflow-x-hidden">
+    <div className="min-h-screen bg-navy-950 text-slate-100 flex flex-col overflow-x-hidden selection:bg-cyan-500/20 selection:text-cyan-200">
       
       {/* Toast Notification */}
       {toast && (
-        <div className="fixed bottom-5 right-5 z-50 flex items-center space-x-2 px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white shadow-2xl text-xs font-medium animate-in fade-in slide-in-from-bottom-3 duration-200">
-          <Bell className="h-4 w-4 text-indigo-400" />
+        <div className="fixed bottom-5 right-5 z-50 flex items-center space-x-2 px-4 py-2.5 rounded-xl neo-glass-card border border-white/20 text-white shadow-2xl text-xs font-semibold animate-in fade-in slide-in-from-bottom-3 duration-200">
+          <Bell className="h-4 w-4 text-cyan-400" />
           <span>{toast.message}</span>
         </div>
       )}
@@ -423,20 +423,20 @@ const MainShell: React.FC = () => {
           ) : activeView === 'teacher-console' ? (
             /* ================= View: Teacher Live Queue Console ================= */
             <div className="flex-1 overflow-y-auto p-6 lg:p-8 space-y-8 max-w-7xl mx-auto w-full">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-2 border-b border-slate-800">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
                 <div>
-                  <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white flex items-center gap-2">
+                  <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white flex items-center gap-3">
                     <span>Teacher Live Queue Console</span>
-                    <Sparkles className="h-6 w-6 text-indigo-400" />
+                    <Sparkles className="h-6 w-6 text-cyan-400" />
                   </h1>
-                  <p className="text-xs sm:text-sm text-slate-400 mt-1">
-                    Live FIFO Kanban board with 1-click claims, Gemini AI pedagogical hints, and velocity metrics.
+                  <p className="text-xs sm:text-sm text-slate-400 mt-1.5">
+                    Live FIFO Kanban board with 1-click claims, Gemini AI pedagogical pre-diagnosis, and turnaround velocity telemetry.
                   </p>
                 </div>
 
                 <div className="flex items-center space-x-3">
-                  <Button variant="outline" size="sm" onClick={fetchDoubts} className="text-xs border-slate-800 text-slate-300">
-                    <RefreshCw className="h-3.5 w-3.5 mr-1.5" />
+                  <Button variant="outline" size="sm" onClick={fetchDoubts} className="text-xs border-white/10 bg-navy-900/80 text-slate-300 hover:bg-navy-800 hover:text-white">
+                    <RefreshCw className="h-3.5 w-3.5 mr-1.5 text-cyan-400" />
                     Refresh Queue
                   </Button>
                 </div>

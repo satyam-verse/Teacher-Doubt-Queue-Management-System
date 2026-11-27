@@ -71,27 +71,27 @@ export const RoleFeatureShowcase: React.FC<RoleFeatureShowcaseProps> = ({ onNavi
   const current = roleDetails[activeRole];
 
   return (
-    <section className="py-20 bg-slate-950 border-b border-slate-900">
-      <div className="container mx-auto px-4 sm:px-6">
+    <section className="py-20 md:py-28 bg-navy-950 border-b border-white/10 relative overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <Badge variant="purple" className="mb-2 text-[10px] font-semibold tracking-wider uppercase">
+          <Badge variant="cyan" className="mb-3 text-[10px] font-mono font-bold tracking-widest uppercase">
             Tailored Experiences
           </Badge>
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Designed for Every Academic Stakeholder
+          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            Architected for Every Academic Stakeholder
           </h2>
           <p className="mt-3 text-sm text-slate-400">
-            Select a role to explore tailored features built specifically for their daily academic workflow.
+            Switch views to discover tailored interfaces engineered specifically for students, professors, and institutional deans.
           </p>
 
           {/* Role Toggle Buttons */}
-          <div className="mt-8 inline-flex items-center rounded-xl bg-slate-900 p-1 border border-slate-800">
+          <div className="mt-8 inline-flex items-center rounded-xl bg-navy-900 p-1.5 border border-white/10 shadow-inner">
             <button
               onClick={() => setActiveRole('student')}
               className={`flex items-center space-x-2 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
-                activeRole === 'student' ? 'bg-indigo-600 text-white shadow' : 'text-slate-400 hover:text-white'
+                activeRole === 'student' ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md' : 'text-slate-400 hover:text-white'
               }`}
             >
               <GraduationCap className="h-4 w-4" />
@@ -101,7 +101,7 @@ export const RoleFeatureShowcase: React.FC<RoleFeatureShowcaseProps> = ({ onNavi
             <button
               onClick={() => setActiveRole('teacher')}
               className={`flex items-center space-x-2 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
-                activeRole === 'teacher' ? 'bg-purple-600 text-white shadow' : 'text-slate-400 hover:text-white'
+                activeRole === 'teacher' ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md' : 'text-slate-400 hover:text-white'
               }`}
             >
               <LayoutDashboard className="h-4 w-4" />
@@ -111,7 +111,7 @@ export const RoleFeatureShowcase: React.FC<RoleFeatureShowcaseProps> = ({ onNavi
             <button
               onClick={() => setActiveRole('admin')}
               className={`flex items-center space-x-2 px-4 py-2 text-xs font-semibold rounded-lg transition-all ${
-                activeRole === 'admin' ? 'bg-cyan-600 text-white shadow' : 'text-slate-400 hover:text-white'
+                activeRole === 'admin' ? 'bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-md' : 'text-slate-400 hover:text-white'
               }`}
             >
               <ShieldCheck className="h-4 w-4" />
@@ -121,10 +121,10 @@ export const RoleFeatureShowcase: React.FC<RoleFeatureShowcaseProps> = ({ onNavi
         </div>
 
         {/* Feature Showcase Card */}
-        <div className={`max-w-4xl mx-auto rounded-2xl bg-gradient-to-br ${current.cardColor} border p-6 sm:p-10 shadow-2xl transition-all`}>
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-slate-800">
+        <div className="max-w-4xl mx-auto rounded-2xl neo-glass-card border border-white/10 p-6 sm:p-10 shadow-2xl transition-all relative overflow-hidden">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-6 border-b border-white/10">
             <div>
-              <Badge variant="outline" className={`text-[10px] mb-2 ${current.badgeColor}`}>
+              <Badge variant="outline" className={`text-[10px] font-mono mb-2 ${current.badgeColor}`}>
                 {current.badge}
               </Badge>
               <h3 className="text-2xl font-bold text-white">{current.title}</h3>
@@ -134,7 +134,7 @@ export const RoleFeatureShowcase: React.FC<RoleFeatureShowcaseProps> = ({ onNavi
             </div>
             <Button
               onClick={() => onNavigate(current.targetView)}
-              className="bg-white hover:bg-slate-100 text-slate-900 font-semibold text-xs px-5 py-2.5 rounded-lg shrink-0 shadow"
+              className="bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs px-5 py-2.5 rounded-xl shrink-0 shadow-lg"
             >
               <span>{current.ctaText}</span>
               <ArrowRight className="h-3.5 w-3.5 ml-1.5" />
@@ -143,9 +143,9 @@ export const RoleFeatureShowcase: React.FC<RoleFeatureShowcaseProps> = ({ onNavi
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
             {current.features.map((feat, idx) => (
-              <div key={idx} className="flex items-start space-x-3 p-3 rounded-xl bg-slate-900/60 border border-slate-800/80">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 mt-0.5" />
-                <span className="text-xs text-slate-200 leading-relaxed">{feat}</span>
+              <div key={idx} className="flex items-start space-x-3 p-3.5 rounded-xl bg-navy-950/70 border border-white/10 shadow-sm">
+                <CheckCircle2 className="h-4 w-4 text-cyan-400 shrink-0 mt-0.5" />
+                <span className="text-xs text-slate-200 leading-relaxed font-medium">{feat}</span>
               </div>
             ))}
           </div>

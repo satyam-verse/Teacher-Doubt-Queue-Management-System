@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { Check, Zap, Building2, X, ArrowRight, Loader2 } from 'lucide-react';
+import { api } from '../../lib/api';
+import { Check, Zap, Building2, X, ArrowRight, Loader2, KeyRound } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Badge } from '../ui/badge';
 import type { SubscriptionTier } from '../../types';
@@ -15,6 +16,7 @@ export const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, onS
   const { user, token } = useAuth();
   const [selectedBilling, setSelectedBilling] = useState<'monthly' | 'annual'>('monthly');
   const [loadingTier, setLoadingTier] = useState<SubscriptionTier | null>(null);
+  const [licenseKey, setLicenseKey] = useState('');
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
@@ -31,30 +33,24 @@ export const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, onS
     setSuccessMsg(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/v1/auth/subscription/upgrade', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ tier })
+      const response = await api.post('/api/v1/auth/subscription/upgrade', {
+        tier,
+        license_key: licenseKey.trim()
       });
 
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to update subscription');
+      if (response.status === 200) {
+        setSuccessMsg(response.data.message || `Welcome to DoubtX ${tier.toUpperCase()}! Your account has been upgraded with instant access.`);
+        if (onSuccess) {
+          onSuccess(tier);
+        }
+        setTimeout(() => {
+          onClose();
+          setSuccessMsg(null);
+        }, 1500);
       }
-
-      setSuccessMsg(`Welcome to DoubtX ${tier.toUpperCase()}! Your account has been upgraded with instant access.`);
-      if (onSuccess) {
-        onSuccess(tier);
-      }
-      setTimeout(() => {
-        onClose();
-        setSuccessMsg(null);
-      }, 1500);
     } catch (err: any) {
-      setErrorMsg(err.message || 'An error occurred during upgrade.');
+      const msg = err.response?.data?.message || err.response?.data?.error || err.message || 'An error occurred during upgrade.';
+      setErrorMsg(msg);
     } finally {
       setLoadingTier(null);
     }
@@ -63,35 +59,62 @@ export const UpgradeModal: React.FC<UpgradeModalProps> = ({ isOpen, onClose, onS
   const currentTier = user?.subscription_tier || 'free';
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="relative w-full max-w-5xl rounded-2xl bg-slate-950 border border-slate-800 text-slate-100 shadow-2xl overflow-hidden p-6 sm:p-8">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in duration-200">
+      <div className="relative w-full max-w-5xl rounded-2xl neo-glass-card bg-navy-950/95 border border-white/10 text-slate-100 shadow-2xl overflow-hidden p-6 sm:p-8 max-h-[90vh] overflow-y-auto">
         
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-5 right-5 p-2 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800/80 transition"
+          className="absolute top-5 right-5 p-2 rounded-lg text-slate-400 hover:text-white hover:bg-navy-900 transition"
         >
           <X className="h-5 w-5" />
         </button>
 
         {/* Modal Header */}
         <div className="text-center max-w-2xl mx-auto mb-8">
-          <Badge variant="purple" className="mb-3 px-3 py-1 font-semibold text-xs tracking-wider uppercase">
+          <Badge variant="cyan" className="mb-3 px-3 py-1 font-mono font-bold text-[10px] tracking-widest uppercase">
             SaaS Subscription
           </Badge>
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-            Choose the Power of <span className="text-gradient-violet">Universal Intelligence</span>
+          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            Choose the Power of <span className="bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">Universal Intelligence</span>
           </h2>
           <p className="mt-2 text-sm text-slate-400">
             From individual STEM students to entire university computer science and medical faculties.
           </p>
 
+          {/* License Key Input Option */}
+          <div className="mt-5 max-w-md mx-auto p-3 rounded-xl bg-navy-900/80 border border-white/10 text-left">
+            <label className="text-[11px] font-mono text-slate-400 flex items-center space-x-1.5 mb-1.5">
+              <KeyRound className="h-3.5 w-3.5 text-cyan-400" />
+              <span>Have an institutional license key?</span>
+            </label>
+            <input
+              type="text"
+              placeholder="e.g. CAMPUS-XXXX-YYYY"
+              value={licenseKey}
+              onChange={(e) => setLicenseKey(e.target.value)}
+              className="w-full bg-navy-950 border border-white/10 rounded-lg px-3 py-1.5 text-xs text-white placeholder-slate-500 font-mono focus:outline-none focus:ring-1 focus:ring-cyan-500"
+            />
+          </div>
+
+          {/* Error & Success Messages */}
+          {errorMsg && (
+            <div className="mt-4 p-3 rounded-xl bg-amber-950/70 border border-amber-500/40 text-amber-200 text-xs font-medium">
+              {errorMsg}
+            </div>
+          )}
+          {successMsg && (
+            <div className="mt-4 p-3 rounded-xl bg-emerald-950/70 border border-emerald-500/40 text-emerald-200 text-xs font-medium">
+              {successMsg}
+            </div>
+          )}
+
           {/* Billing Toggle */}
-          <div className="mt-6 inline-flex items-center rounded-xl bg-slate-900 p-1 border border-slate-800">
+          <div className="mt-6 inline-flex items-center rounded-xl bg-navy-900 p-1 border border-white/10">
             <button
               onClick={() => setSelectedBilling('monthly')}
-              className={`px-4 py-1.5 text-xs font-medium rounded-lg transition-all ${
-                selectedBilling === 'monthly' ? 'bg-indigo-600 text-white shadow' : 'text-slate-400 hover:text-white'
+              className={`px-4 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+                selectedBilling === 'monthly' ? 'bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow' : 'text-slate-400 hover:text-white'
               }`}
             >
               Monthly Billing

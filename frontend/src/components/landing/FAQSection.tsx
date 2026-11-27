@@ -33,15 +33,15 @@ export const FAQSection: React.FC = () => {
   };
 
   return (
-    <section className="py-20 bg-slate-950 border-b border-slate-900" id="faq">
-      <div className="container mx-auto px-4 sm:px-6 max-w-4xl">
+    <section className="py-20 md:py-28 bg-navy-950 border-b border-white/10 relative" id="faq">
+      <div className="container mx-auto px-4 sm:px-6 max-w-4xl relative z-10">
         
         {/* Header */}
         <div className="text-center mb-14">
-          <Badge variant="purple" className="mb-2 text-[10px] font-semibold tracking-wider uppercase">
+          <Badge variant="cyan" className="mb-3 text-[10px] font-mono font-bold tracking-widest uppercase">
             Questions & Answers
           </Badge>
-          <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
             Frequently Asked Questions
           </h2>
           <p className="mt-3 text-sm text-slate-400">
@@ -56,25 +56,25 @@ export const FAQSection: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="rounded-xl border border-slate-800 bg-slate-900/50 overflow-hidden transition-all"
+                className="neo-glass-card rounded-2xl border border-white/10 overflow-hidden transition-all"
               >
                 <button
                   onClick={() => toggleFAQ(idx)}
-                  className="w-full flex items-center justify-between p-5 text-left text-sm font-semibold text-slate-100 hover:text-indigo-300 transition"
+                  className="w-full flex items-center justify-between p-5 text-left text-sm font-semibold text-slate-100 hover:text-cyan-300 transition-colors"
                 >
-                  <span className="flex items-center space-x-2.5 pr-4">
-                    <HelpCircle className="h-4 w-4 text-indigo-400 shrink-0" />
+                  <span className="flex items-center space-x-3 pr-4">
+                    <HelpCircle className="h-4 w-4 text-cyan-400 shrink-0" />
                     <span>{faq.q}</span>
                   </span>
                   <ChevronDown
                     className={`h-4 w-4 text-slate-400 shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'rotate-180 text-indigo-400' : ''
+                      isOpen ? 'rotate-180 text-cyan-400' : ''
                     }`}
                   />
                 </button>
 
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-slate-800/60 bg-slate-950/40">
+                  <div className="px-5 pb-5 pt-1 text-xs sm:text-sm text-slate-300 leading-relaxed border-t border-white/10 bg-navy-950/60">
                     {faq.a}
                   </div>
                 )}

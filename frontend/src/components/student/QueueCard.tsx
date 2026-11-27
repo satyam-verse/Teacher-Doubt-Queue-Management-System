@@ -16,53 +16,53 @@ export const QueueCard: React.FC<QueueCardProps> = ({ doubt }) => {
   const isResolved = doubt.status === 'RESOLVED';
 
   return (
-    <Card className={`border-2 transition-all ${
+    <Card className={`border-2 transition-all neo-glass-card ${
       isAttended
-        ? 'border-indigo-500 shadow-lg shadow-indigo-500/10 bg-indigo-50/20 dark:bg-indigo-950/20'
+        ? 'border-violet-500 shadow-glow-violet bg-navy-900/90'
         : isResolved
-        ? 'border-emerald-500 bg-emerald-50/20 dark:bg-emerald-950/20'
-        : 'border-slate-200 dark:border-slate-800'
+        ? 'border-emerald-500 bg-navy-900/90 shadow-md'
+        : 'border-white/10 bg-navy-900/80 shadow-md'
     }`}>
-      <CardHeader className="pb-3">
+      <CardHeader className="pb-3 border-b border-white/5">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center space-x-2">
-            <span className="text-sm font-semibold text-slate-900 dark:text-white">
+            <span className="text-sm font-bold text-white">
               {doubt.student_name}'s Question
             </span>
-            <span className="text-xs text-slate-500">
+            <span className="text-xs text-slate-400 font-mono">
               {formatTimeAgo(doubt.created_at)}
             </span>
           </div>
 
           <div className="flex items-center space-x-2">
             {isAttended ? (
-              <Badge variant="purple" className="animate-pulse flex items-center space-x-1">
+              <Badge variant="purple" className="animate-pulse flex items-center space-x-1 font-mono text-[10px]">
                 <Bell className="h-3 w-3 mr-1" /> Teacher Attending Now!
               </Badge>
             ) : isResolved ? (
-              <Badge variant="success" className="flex items-center space-x-1">
+              <Badge variant="success" className="flex items-center space-x-1 font-mono text-[10px]">
                 <CheckCircle2 className="h-3 w-3 mr-1" /> Resolved
               </Badge>
             ) : (
-              <Badge variant="warning" className="flex items-center space-x-1">
+              <Badge variant="warning" className="flex items-center space-x-1 font-mono text-[10px]">
                 <Clock className="h-3 w-3 mr-1" /> Queue Position #{doubt.queue_position || 1}
               </Badge>
             )}
 
-            <Badge variant="outline">{doubt.category}</Badge>
+            <Badge variant="outline" className="font-mono text-[10px] border-white/10 text-cyan-300">{doubt.category}</Badge>
           </div>
         </div>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-4 pt-4">
         {/* Question Text */}
-        <div className="p-3.5 rounded-lg bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 text-sm text-slate-800 dark:text-slate-200 whitespace-pre-wrap">
+        <div className="p-3.5 rounded-xl bg-navy-950/80 border border-white/10 text-sm text-slate-200 whitespace-pre-wrap leading-relaxed shadow-inner">
           {doubt.doubt}
         </div>
 
         {/* Attachment preview if available */}
         {doubt.attachment_url && (
-          <div className="flex items-center space-x-2 text-xs text-indigo-600 dark:text-indigo-400">
+          <div className="flex items-center space-x-2 text-xs text-cyan-400">
             <ExternalLink className="h-3.5 w-3.5" />
             <a href={doubt.attachment_url} target="_blank" rel="noopener noreferrer" className="hover:underline font-medium">
               View Attached Screenshot / Code (AWS S3)
@@ -72,7 +72,7 @@ export const QueueCard: React.FC<QueueCardProps> = ({ doubt }) => {
 
         {/* Dynamic Queue Status Alert Banner */}
         {isAttended ? (
-          <div className="p-3.5 rounded-xl bg-indigo-600 text-white flex items-start space-x-3 shadow-sm">
+          <div className="p-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 text-white flex items-start space-x-3 shadow-glow-violet">
             <Bell className="h-5 w-5 mt-0.5 flex-shrink-0 animate-bounce" />
             <div>
               <p className="font-semibold text-sm">It's your turn!</p>

@@ -97,25 +97,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
   return (
     <aside
-      className={`fixed inset-y-0 left-0 z-40 flex flex-col border-r border-slate-200/80 bg-white/95 backdrop-blur dark:border-slate-800/80 dark:bg-slate-950/95 transition-all duration-300 ${
+      className={`fixed inset-y-0 left-0 z-40 flex flex-col border-r border-white/10 bg-navy-950/95 backdrop-blur-xl transition-all duration-300 ${
         isCollapsed ? 'w-16' : 'w-72'
       }`}
     >
       {/* Brand Header */}
-      <div className="flex h-16 items-center justify-between px-3.5 border-b border-slate-200/60 dark:border-slate-800/60">
+      <div className="flex h-16 items-center justify-between px-3.5 border-b border-white/10">
         <div
-          className="flex items-center space-x-3 cursor-pointer overflow-hidden"
+          className="flex items-center space-x-3 cursor-pointer overflow-hidden group"
           onClick={() => setActiveView('landing')}
         >
-          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-indigo-600 via-violet-600 to-purple-500 text-white shadow-md shadow-indigo-500/20">
+          <div className="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-xl bg-gradient-to-tr from-violet-600 via-indigo-600 to-cyan-500 text-white shadow-glow-violet transition-transform group-hover:scale-105">
             <Sparkles className="h-4.5 w-4.5" />
           </div>
           {!isCollapsed && (
             <div className="truncate">
-              <span className="text-base font-extrabold tracking-tight bg-gradient-to-r from-indigo-600 via-violet-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="text-base font-extrabold tracking-tight bg-gradient-to-r from-white via-slate-100 to-cyan-300 bg-clip-text text-transparent">
                 DoubtX AI
               </span>
-              <p className="text-[10px] text-slate-400 font-medium">Universal AI & Queue</p>
+              <p className="text-[10px] text-slate-400 font-mono">Neo Academic</p>
             </div>
           )}
         </div>
@@ -123,7 +123,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Collapse toggle */}
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+          className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-white/[0.08] transition-colors"
           title={isCollapsed ? 'Expand Sidebar' : 'Collapse Sidebar'}
         >
           {isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
@@ -134,7 +134,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <div className="p-3">
         <button
           onClick={onNewConversation}
-          className={`w-full flex items-center justify-center space-x-2 py-2.5 px-3 rounded-xl font-medium text-xs text-white bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-700 hover:to-violet-700 shadow-md shadow-indigo-500/15 transition-all cursor-pointer ${
+          className={`w-full flex items-center justify-center space-x-2 py-2.5 px-3 rounded-xl font-semibold text-xs text-white bg-gradient-to-r from-violet-600 to-cyan-600 hover:from-violet-500 hover:to-cyan-500 shadow-glow-violet transition-all cursor-pointer ${
             isCollapsed ? 'px-0' : ''
           }`}
           title="Start New AI Chat"
@@ -150,12 +150,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
           onClick={() => setActiveView('landing')}
           className={`w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
             activeView === 'landing'
-              ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300'
-              : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-900'
+              ? 'bg-gradient-to-r from-violet-600 to-cyan-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-white hover:bg-white/[0.06]'
           }`}
           title="Overview & Landing"
         >
-          <Home className="h-4 w-4 flex-shrink-0 text-indigo-500" />
+          <Home className="h-4 w-4 flex-shrink-0 text-cyan-400" />
           {!isCollapsed && <span>Overview</span>}
         </button>
 
@@ -163,12 +163,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
           onClick={() => setActiveView('ai-solver')}
           className={`w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
             activeView === 'ai-solver'
-              ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300'
-              : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-900'
+              ? 'bg-gradient-to-r from-violet-600 to-cyan-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-white hover:bg-white/[0.06]'
           }`}
           title="Universal AI Workspace"
         >
-          <Sparkles className="h-4 w-4 flex-shrink-0 text-indigo-500" />
+          <Sparkles className="h-4 w-4 flex-shrink-0 text-violet-400" />
           {!isCollapsed && <span>AI Workspace</span>}
         </button>
 
@@ -176,12 +176,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
           onClick={() => setActiveView('student-dashboard')}
           className={`w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
             activeView === 'student-dashboard'
-              ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300'
-              : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-900'
+              ? 'bg-gradient-to-r from-violet-600 to-cyan-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-white hover:bg-white/[0.06]'
           }`}
           title="Student Classroom Portal"
         >
-          <GraduationCap className="h-4 w-4 flex-shrink-0 text-indigo-500" />
+          <GraduationCap className="h-4 w-4 flex-shrink-0 text-cyan-400" />
           {!isCollapsed && <span>Student Portal</span>}
         </button>
 
@@ -189,12 +189,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
           onClick={() => setActiveView('teacher-console')}
           className={`w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
             activeView === 'teacher-console'
-              ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300'
-              : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-900'
+              ? 'bg-gradient-to-r from-violet-600 to-cyan-600 text-white shadow-md'
+              : 'text-slate-400 hover:text-white hover:bg-white/[0.06]'
           }`}
           title="Teacher Live Queue"
         >
-          <LayoutDashboard className="h-4 w-4 flex-shrink-0 text-indigo-500" />
+          <LayoutDashboard className="h-4 w-4 flex-shrink-0 text-indigo-400" />
           {!isCollapsed && <span>Teacher Queue</span>}
         </button>
 
@@ -203,8 +203,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
             onClick={() => setActiveView('admin-console')}
             className={`w-full flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
               activeView === 'admin-console'
-                ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-950/60 dark:text-indigo-300'
-                : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-900'
+                ? 'bg-gradient-to-r from-violet-600 to-cyan-600 text-white shadow-md'
+                : 'text-slate-400 hover:text-white hover:bg-white/[0.06]'
             }`}
             title="Institutional Admin Console"
           >
@@ -220,28 +220,28 @@ export const Sidebar: React.FC<SidebarProps> = ({
           
           {/* Search Bar */}
           <div className="relative mb-2">
-            <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-slate-400" />
+            <Search className="absolute left-2.5 top-2.5 h-3.5 w-3.5 text-slate-500" />
             <input
               type="text"
               placeholder="Search chats..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg pl-8 pr-2.5 py-1.5 text-xs text-slate-900 dark:text-slate-200 placeholder-slate-400 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="w-full bg-navy-900 border border-white/10 rounded-lg pl-8 pr-2.5 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-500"
             />
           </div>
 
           <div className="flex items-center justify-between pb-1 px-1">
-            <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400">
               Discussions
             </span>
-            <span className="text-[10px] text-slate-400">
+            <span className="text-[10px] font-mono text-cyan-400">
               {filteredConversations.length}
             </span>
           </div>
 
           <div className="flex-1 overflow-y-auto space-y-1 py-1 pr-1">
             {filteredConversations.length === 0 ? (
-              <p className="text-[11px] text-slate-400 italic px-2 py-4 text-center">
+              <p className="text-[11px] text-slate-500 italic px-2 py-4 text-center">
                 {searchQuery ? 'No matching discussions' : 'No discussions yet. Ask anything!'}
               </p>
             ) : (
@@ -261,8 +261,8 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     }}
                     className={`group flex items-center justify-between px-2.5 py-2 rounded-xl text-xs cursor-pointer transition-all ${
                       isActive
-                        ? 'bg-indigo-100/70 text-indigo-950 font-medium dark:bg-indigo-900/40 dark:text-indigo-200'
-                        : 'text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-900 dark:hover:text-slate-200'
+                        ? 'bg-navy-850 border border-cyan-500/40 text-white font-medium shadow-sm'
+                        : 'text-slate-400 hover:bg-white/[0.04] hover:text-white'
                     }`}
                   >
                     {isEditing ? (
@@ -276,11 +276,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
                             if (e.key === 'Escape') setEditingId(null);
                           }}
                           autoFocus
-                          className="w-full bg-white dark:bg-slate-900 border border-indigo-400 rounded px-1.5 py-0.5 text-xs text-slate-900 dark:text-slate-100 focus:outline-none"
+                          className="w-full bg-navy-900 border border-cyan-400 rounded px-1.5 py-0.5 text-xs text-white focus:outline-none"
                         />
                         <button
                           onClick={(e) => handleSaveRename(conv.id, e)}
-                          className="p-1 text-emerald-600 hover:text-emerald-700 dark:text-emerald-400"
+                          className="p-1 text-emerald-400 hover:text-emerald-300"
                           title="Save title"
                         >
                           <Check className="h-3 w-3" />
@@ -290,9 +290,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                       <>
                         <div className="flex items-center space-x-2 truncate pr-2">
                           {isPinned ? (
-                            <Pin className="h-3 w-3 flex-shrink-0 text-indigo-400 rotate-45" />
+                            <Pin className="h-3 w-3 flex-shrink-0 text-cyan-400 rotate-45" />
                           ) : (
-                            <MessageSquare className="h-3.5 w-3.5 flex-shrink-0 text-slate-400 group-hover:text-indigo-500" />
+                            <MessageSquare className="h-3.5 w-3.5 flex-shrink-0 text-slate-500 group-hover:text-cyan-400" />
                           )}
                           <span className="truncate">{conv.title}</span>
                         </div>
@@ -302,7 +302,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                             <button
                               onClick={(e) => onPinConversation(conv.id, e)}
                               className={`p-1 rounded transition-colors ${
-                                isPinned ? 'text-indigo-400 hover:text-slate-400' : 'text-slate-400 hover:text-indigo-400'
+                                isPinned ? 'text-cyan-400 hover:text-slate-400' : 'text-slate-500 hover:text-cyan-400'
                               }`}
                               title={isPinned ? 'Unpin discussion' : 'Pin discussion'}
                             >
@@ -311,14 +311,14 @@ export const Sidebar: React.FC<SidebarProps> = ({
                           )}
                           <button
                             onClick={(e) => handleStartRename(conv, e)}
-                            className="p-1 text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 rounded"
+                            className="p-1 text-slate-500 hover:text-cyan-400 rounded"
                             title="Rename chat"
                           >
                             <Pencil className="h-3 w-3" />
                           </button>
                           <button
                             onClick={(e) => onDeleteConversation(conv.id, e)}
-                            className="p-1 text-slate-400 hover:text-red-500 rounded"
+                            className="p-1 text-slate-500 hover:text-red-400 rounded"
                             title="Delete chat"
                           >
                             <Trash2 className="h-3 w-3" />
@@ -338,23 +338,23 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {isCollapsed && <div className="flex-1" />}
 
       {/* Bottom Footer Controls */}
-      <div className="p-3 border-t border-slate-200/60 dark:border-slate-800/60 space-y-2">
+      <div className="p-3 border-t border-white/10 space-y-2">
         {/* Gemini Engine & Connection status */}
         {!isCollapsed && (
           <div className="space-y-1.5 px-1 pb-1">
-            <div className="flex items-center justify-between text-[11px] text-slate-500">
+            <div className="flex items-center justify-between text-[11px] text-slate-400">
               <span className="flex items-center space-x-1.5" title={aiStatus?.message || 'Universal AI Engine'}>
-                <Cpu className="h-3.5 w-3.5 text-indigo-500 flex-shrink-0" />
-                <span className="font-medium text-slate-700 dark:text-slate-300">
+                <Cpu className="h-3.5 w-3.5 text-cyan-400 flex-shrink-0" />
+                <span className="font-mono text-slate-300">
                   {aiStatus?.model || 'Gemini 2.5'}
                 </span>
               </span>
-              <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-semibold ${
+              <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-[9px] font-mono font-semibold ${
                 aiStatus?.status === 'connected'
-                  ? 'bg-emerald-100 text-emerald-800 dark:bg-emerald-950/60 dark:text-emerald-300'
+                  ? 'bg-emerald-950/70 border border-emerald-500/40 text-emerald-300'
                   : aiStatus?.status === 'unconfigured'
-                  ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300'
-                  : 'bg-rose-100 text-rose-800 dark:bg-rose-950/60 dark:text-rose-300'
+                  ? 'bg-amber-950/70 border border-amber-500/40 text-amber-300'
+                  : 'bg-rose-950/70 border border-rose-500/40 text-rose-300'
               }`}>
                 {aiStatus?.status === 'connected' ? 'Active' : aiStatus?.status === 'unconfigured' ? 'Key Needed' : 'Offline'}
               </span>
@@ -393,25 +393,25 @@ export const Sidebar: React.FC<SidebarProps> = ({
         {/* Auth profile / login */}
         {isAuthenticated && user ? (
           <div
-            className={`flex items-center justify-between p-2 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200/60 dark:border-slate-800 ${
+            className={`flex items-center justify-between p-2 rounded-xl bg-navy-900 border border-white/10 ${
               isCollapsed ? 'p-1 justify-center' : ''
             }`}
           >
             <div className="flex items-center space-x-2 truncate">
-              <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-indigo-600 text-white text-xs font-bold">
+              <div className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-tr from-violet-600 to-cyan-500 text-white text-xs font-bold shadow-sm">
                 {user.full_name.charAt(0).toUpperCase()}
               </div>
               {!isCollapsed && (
                 <div className="truncate text-left">
-                  <div className="text-xs font-semibold text-slate-900 dark:text-white truncate">
+                  <div className="text-xs font-semibold text-white truncate">
                     {user.full_name}
                   </div>
                   <div className="flex items-center space-x-1.5 text-[10px] text-slate-400">
-                    <span className="capitalize">{user.role}</span>
+                    <span className="capitalize text-slate-400 font-mono">{user.role}</span>
                     <span>•</span>
                     <span
                       onClick={onOpenUpgrade}
-                      className="uppercase font-bold text-indigo-400 hover:text-indigo-300 cursor-pointer"
+                      className="uppercase font-mono font-bold text-cyan-400 hover:text-cyan-300 cursor-pointer"
                       title="Subscription Plan"
                     >
                       {user.subscription_tier || 'free'}
@@ -424,7 +424,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             {!isCollapsed && (
               <button
                 onClick={logout}
-                className="p-1 text-slate-400 hover:text-red-500 transition-colors"
+                className="p-1 text-slate-400 hover:text-red-400 transition-colors"
                 title="Sign Out"
               >
                 <LogOut className="h-3.5 w-3.5" />
@@ -434,11 +434,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
         ) : (
           <button
             onClick={onOpenAuth}
-            className={`w-full flex items-center justify-center space-x-2 py-2 px-3 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors ${
+            className={`w-full flex items-center justify-center space-x-2 py-2 px-3 rounded-xl border border-white/10 text-xs font-semibold text-white bg-navy-900 hover:bg-navy-850 hover:border-cyan-500/30 transition-all ${
               isCollapsed ? 'px-0' : ''
             }`}
           >
-            <UserIcon className="h-3.5 w-3.5" />
+            <UserIcon className="h-3.5 w-3.5 text-cyan-400" />
             {!isCollapsed && <span>Sign In</span>}
           </button>
         )}

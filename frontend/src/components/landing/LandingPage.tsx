@@ -26,7 +26,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
+    <div className="min-h-screen bg-navy-950 text-slate-100 flex flex-col selection:bg-cyan-500/20 selection:text-cyan-200">
       <main className="flex-1">
         <LandingHero onNavigate={onNavigate} onOpenUpgrade={onOpenUpgrade} />
         <SubjectGrid onSelectPrompt={handleSelectPrompt} />

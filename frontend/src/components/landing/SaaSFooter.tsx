@@ -9,26 +9,26 @@ interface SaaSFooterProps {
 
 export const SaaSFooter: React.FC<SaaSFooterProps> = ({ onNavigate, onOpenUpgrade }) => {
   return (
-    <footer className="bg-slate-950 text-slate-400 border-t border-slate-900 pt-16 pb-12">
-      <div className="container mx-auto px-4 sm:px-6">
+    <footer className="bg-navy-950 text-slate-400 border-t border-white/10 pt-16 pb-12 relative overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-slate-900">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
           
           {/* Brand Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2.5">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-600 text-white shadow-glow-violet">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-tr from-violet-600 via-indigo-600 to-cyan-500 text-white shadow-glow-violet">
                 <Sparkles className="h-4 w-4" />
               </div>
-              <span className="text-lg font-bold text-white tracking-tight">DoubtX AI</span>
+              <span className="text-lg font-extrabold text-white tracking-tight">DoubtX AI</span>
             </div>
-            <p className="text-xs text-slate-400 leading-relaxed">
+            <p className="text-xs text-slate-400 leading-relaxed font-normal">
               Universal Academic Intelligence & Synchronized Real-Time Classroom Doubt Queue Management for Higher Education.
             </p>
             {/* Live System Status Pill */}
-            <div className="inline-flex items-center space-x-2 text-[11px] bg-slate-900 px-3 py-1.5 rounded-full border border-slate-800">
+            <div className="inline-flex items-center space-x-2 text-[11px] bg-navy-900/90 px-3 py-1.5 rounded-full border border-white/10 font-mono">
               <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-slate-300 font-medium">All Systems Operational</span>
+              <span className="text-slate-300 font-medium">All Cloud Systems Operational</span>
             </div>
           </div>
 
